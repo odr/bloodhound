@@ -9,10 +9,7 @@ module Database.Bloodhound.Internal.Query
 
 import           Bloodhound.Import
 
-import           Control.Monad.Fail  (MonadFail)
-import           Data.Char           (isNumber)
 import qualified Data.HashMap.Strict as HM
-import           Data.List           (nub)
 import qualified Data.Text           as T
 
 import           Database.Bloodhound.Common.Script as X

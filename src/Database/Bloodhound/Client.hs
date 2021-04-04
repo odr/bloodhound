@@ -113,7 +113,7 @@ import           Control.Applicative          as A
 import           Control.Monad
 import           Control.Monad.Catch
 import           Control.Monad.IO.Class
-import           Data.Aeson
+import           Data.Aeson hiding(json)
 import           Data.ByteString.Lazy.Builder
 import qualified Data.ByteString.Lazy.Char8   as L
 import           Data.Foldable                (toList)
@@ -133,7 +133,7 @@ import qualified Network.HTTP.Types.Method    as NHTM
 import qualified Network.HTTP.Types.Status    as NHTS
 import qualified Network.HTTP.Types.URI       as NHTU
 import qualified Network.URI                  as URI
-import           Prelude                      hiding (filter, head)
+import           Prelude                      hiding (filter, head, id)
 
 import           Database.Bloodhound.Types
 
@@ -1112,14 +1112,14 @@ storeSearchTemplate (SearchTemplateId tid) ts =
     json = Object $ HM.fromList ["script" .= Object ("lang" .= String "mustache" <> "source" .= ts) ]
 
 -- | 'getSearchTemplate', get info of an stored 'SearchTemplateSource'.
-getSearchTemplate :: MonadBH m => SearchTemplateId -> m Reply 
+getSearchTemplate :: MonadBH m => SearchTemplateId -> m Reply
 getSearchTemplate (SearchTemplateId tid) =
   url >>= get
   where
     url = joinPath ["_scripts", tid]
 
--- | 'storeSearchTemplate', 
-deleteSearchTemplate :: MonadBH m => SearchTemplateId -> m Reply 
+-- | 'storeSearchTemplate',
+deleteSearchTemplate :: MonadBH m => SearchTemplateId -> m Reply
 deleteSearchTemplate (SearchTemplateId tid) =
   url >>= delete
   where

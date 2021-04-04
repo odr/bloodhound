@@ -3,11 +3,12 @@
 
 module Database.Bloodhound.Common.Script where
 
-import Bloodhound.Import
+import           Bloodhound.Import
 
 import qualified Data.HashMap.Strict as HM
 
 import           Database.Bloodhound.Internal.Newtypes
+import           Prelude hiding (id)
 
 newtype ScriptFields =
   ScriptFields (HM.HashMap ScriptFieldName ScriptFieldValue)
@@ -160,7 +161,7 @@ instance ToJSON Script where
 
 instance FromJSON Script where
   parseJSON = withObject "Script" parse
-    where 
+    where
       parseSource o = do
         inline <- o .:? "source"
         id <- o .:? "id"

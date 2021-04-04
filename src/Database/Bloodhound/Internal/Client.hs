@@ -1,4 +1,3 @@
-{-# LANGUAGE CPP                        #-}
 {-# LANGUAGE FlexibleInstances          #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE MultiParamTypeClasses      #-}
@@ -10,11 +9,6 @@ module Database.Bloodhound.Internal.Client where
 
 import           Bloodhound.Import
 
-#if defined(MIN_VERSION_GLASGOW_HASKELL)
-#if MIN_VERSION_GLASGOW_HASKELL(8,0,0,0)
-import           Control.Monad.Fail                         (MonadFail)
-#endif
-#endif
 import qualified Data.HashMap.Strict                        as HM
 import           Data.Map.Strict                            (Map)
 import qualified Data.SemVer                                as SemVer
@@ -78,11 +72,7 @@ newtype BH m a = BH {
                , MonadFix
                , MonadThrow
                , MonadCatch
-#if defined(MIN_VERSION_GLASGOW_HASKELL)
-#if MIN_VERSION_GLASGOW_HASKELL(8,6,0,0)
                , MonadFail
-#endif
-#endif
                , MonadMask)
 
 instance MonadTrans BH where
